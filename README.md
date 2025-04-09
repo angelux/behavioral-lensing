@@ -153,17 +153,16 @@ By constructing that frame deliberately—through role, values, symbols, or epis
 
 ## Core Components
 
-Behavioral Lensing is built from four composable elements.  
-Each one shapes a different layer of how the model **interprets, understands, and reasons through a task**:
+While Behavioral Lensing is a broad framework for interpretive control, its most immediately actionable layer is built from four core components. These elements help shape **how** a language model interprets, understands, and reasons through a task:
 
-- **Interpretive Framing Block (IFB)** – establishes the model’s stance  
-- **Symbolic Anchors (SA)** – reinforce key values, tones, or priorities, often embedded within the IFB  
-- **Task Reflection (TR)** – surfaces the model’s current interpretive state  
-- **Reasoning Path (RP)** – guides the model’s thinking strategy
+- **Interpretive Framing Block (IFB)** – establishes the model’s initial stance.
+- **Symbolic Anchors (SA)** – reinforce key values, tones, or priorities, often embedded within the IFB.  
+- **Task Reflection (TR)** – surfaces the model’s current interpretive state.  
+- **Reasoning Path (RP)** – guides the model’s thinking strategy during execution.
 
-These components can be used independently, but they work best when layered—each one reinforcing and grounding the others. **Symbolic Anchors are often embedded within the IFB**, shaping its tone and focus, while **Task Reflection and Reasoning Paths operate further downstream**, influencing how the model processes and executes the task.  
+These components are **modular and composable**. They can be used independently, but they work best when layered—each one reinforcing and grounding the others. Symbolic Anchors often shape the tone and value orientation of the IFB, while Task Reflection and Reasoning Paths operate further downstream, steering processing and output behaviors.
 
-Used together, they give you leverage over not just what the model outputs, but how it gets there.
+They don't define the whole of Behavioral Lensing—but they provide a concrete entry point. Used together, they give you leverage not just over *what* the model says, but *how* it arrives there.
 
 ### Interpretive Framing Block (IFB)
 An expressive preamble that gives the model an interpretive **stance**—a sense of who it is, what it values, and how it approaches the world.
