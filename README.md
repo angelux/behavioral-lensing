@@ -142,6 +142,8 @@ This approach gives you leverage that’s otherwise invisible:
 
 Behavioral Lensing doesn’t constrain creativity—it scaffolds it. By making the interpretive layer visible, it becomes steerable.
 
+**I didn’t build this from theory. I built it from the patterns I saw emerge—again and again—while working with models directly. These ideas have proven useful in practice, but I also know I’m standing on moving ground. My understanding may shift. If it does, this framework will shift with it.**
+
 ## Behavioral Lensing: The Definition
 
 **Behavioral Lensing** is a structured method of shaping an LLM's output by modifying the **interpretive conditions** under which it generates responses.
