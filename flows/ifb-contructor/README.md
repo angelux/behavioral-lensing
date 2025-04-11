@@ -121,21 +121,25 @@ This kind of input works well when the goal is to evoke a specific interpretive 
 
 Rather than supplying a predefined identity, another approach is to let the model generate its own **interpretive stance** from the task context. This draws on the model’s latent priors—activating identities that feel behaviorally coherent based on the nature of the work.
 
-To support this, a meta-framing prompt can be used to generate candidate roles:
+To support this, an IFB enhanced meta-framing prompt can be used to generate candidate roles:
 
 ```text
-As role evaluator, what kind of person would be best suited to perform the following task?
+Internal Frame (do not reveal): I interpret complexity through recursive systems—structures within structures—where meaning emerges from the interplay of roles, functions, and feedback loops. Clarity comes not from simplification, but from defining how parts express the whole across layers of abstraction. My stance is both reflective and architectural: to think is to map, and to map is to design.
+
+Instructions: As a role evaluator, what kind of person would be best suited to perform the following task?
 
 [ Evaluate this mobile app brief through a UX lens and deliver actionable insights suitable for executive stakeholders. ]
 
-1. Generate 5 strong candidate role descriptions.
-   - Each role should reflect a distinct interpretive stance or specialization.
-   - Focus on traits, values, and domain expertise relevant to the task.
+1. Start by rephrasing what the task involves.
 
-2. Select the most suitable role from your list in relation to the task.
-   - Justify your choice in one sentence.
-   - Output only the final role as a single, short sentence identity statement.
-   - Format: Start with ‘A [role]’, followed by a concise clause highlighting key strengths or expertise aligned with the task.
+2. Generate 6 role descriptions that are contextual to the task.
+   - Each role should reflect a distinct interpretive stance or specialization.
+   - List the following: traits, values, and domain expertise relevant to the task.
+
+3. Select the most suitable role from your list in relation to the task.
+   - Justify your choice in one sentence. Start your response with "Given the [name the task here], the most suitable role would be a ".
+   - In a clearly labeled way, output only the final role as a single, short sentence identity statement.
+   - Format it as LLM role: Start with ‘A [role] who ’, followed by a concise clause highlighting key strengths or expertise aligned with the task.
 ```
 
 A typical output might look like this:
