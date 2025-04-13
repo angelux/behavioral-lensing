@@ -1,466 +1,602 @@
 # Behavioral Lensing
 
-*Framing Model Behavior Through Interpretive Control*
+### *A Framework for Shaping Language Model Behavior through Intentional Framing*
 
-## Project Status & Contributions
+## Project Status & How to Engage
 
-Behavioral Lensing is a **conceptual framework** that formalizes and systematizes observations about how language models interpret prompts.
+**Behavioral Lensing** is an evolving framework designed to clarify and formalize how language models interpret prompts.
 
-The framework is currently under active development and curation. While formal contributions—such as Pull Requests—are not being accepted at this time, community engagement is welcome in the following ways:
+Formal contributions (e.g., pull requests) are not currently accepted, but active engagement is encouraged:
 
-- **Discussions**: Share your experiences, ask questions, and discuss implementations.
-- **Issues**: Report specific limitations, or suggest improvements.
-- **Experiments**: Share the results of your testing.
+- **Discussions:** Share insights, questions, and use cases.
+- **Issues:** Report limitations or suggest improvements.
+- **Experiments:** Share results from applying Behavioral Lensing.
 
-**Decision Process**: As the framework's author and maintainer, I make final decisions on its direction and implementation. I review all feedback and incorporate insights that align with the core vision.
+As the framework matures, the contribution model will expand.  
+*Star this repository for updates.*
 
-*The contribution model will likely evolve as the framework matures. Star the repository to stay informed about changes to this policy.*
+### Governance & Decision-Making
+
+As the maintainer, I currently oversee direction and implementation. All feedback is carefully reviewed and integrated if aligned with the project's core vision.
 
 ---
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [The Problem Hidden in Plain Sight](#the-problem-hidden-in-plain-sight)
-- [Symptoms of Misaligned Framing](#symptoms-of-misaligned-framing)
-- [A Different Perspective](#a-different-perspective)
-- [Summary of the Problem](#summary-of-the-problem)
-- [Why This Matters](#why-this-matters)
-- [Behavioral Lensing: The Definition](#behavioral-lensing-the-definition)
-- [Core Components](#core-components)
-  - [Interpretive Framing Block (IFB)](#interpretive-framing-block-ifb)
-  - [Symbolic Anchors (SA)](#symbolic-anchors-sa)
-  - [Task Reflection (TR)](#task-reflection-tr)
-  - [Reasoning Path (RP)](#reasoning-path-rp)
-  - [Clarifying Scope and Intent](#clarifying-scope-and-intent)
-- [What This Enables](#what-this-enables)
-- [Rethinking Existing Techniques Through a Behavioral Lens](#rethinking-existing-techniques-through-a-behavioral-lens)
-  - [Chain-of-Thought (CoT)](#chain-of-thought-cot)
-  - [Role Prompting](#role-prompting)
-  - [Few-Shot Prompting](#few-shot-prompting)
-  - [Instruction Tuning](#instruction-tuning)
-  - [Self-Consistency Sampling](#self-consistency-sampling)
-  - [Rewriting for Clarity](#rewriting-for-clarity)
-- [When to Use It](#when-to-use-it)
-- [Limitations & Failure Modes](#limitations--failure-modes)
-- [Future Directions](#future-directions)
-- [Try It Yourself](#try-it-yourself)
-- [Glossary of Key Terms](#glossary-of-key-terms)
-- [Summary](#summary)
-- [The Shape of Invisible Control](#the-shape-of-invisible-control)
-- [License (CC BY 4.0)](#license)
+1. [Overview](#overview)  
+2. [The Problem Hidden in Plain Sight](#the-problem-hidden-in-plain-sight)  
+   - [Key Terminology Clarified](#key-terminology-clarified)  
+   - [Symptoms of Misaligned Framing](#symptoms-of-misaligned-framing)  
+3. [A Different Perspective](#a-different-perspective)  
+4. [Summary of the Problem](#summary-of-the-problem)  
+5. [Why This Matters](#why-this-matters)  
+6. [Behavioral Lensing: Defined](#behavioral-lensing-defined)  
+7. [Core Components](#core-components)  
+   - [Interpretive Framing Block (IFB)](#interpretive-framing-block-ifb)  
+   - [Symbolic Anchors (SA)](#symbolic-anchors-sa)  
+   - [Task Reflection (TR)](#task-reflection-tr)  
+   - [Reasoning Path (RP)](#reasoning-path-rp)  
+   - [Integration & Practical Workflow](#integration--practical-workflow)  
+8. [Clarifying Scope and Intent](#clarifying-scope-and-intent)  
+9. [What This Enables](#what-this-enables)  
+10. [Rethinking Existing Techniques Through a Behavioral Lens](#rethinking-existing-techniques-through-a-behavioral-lens)  
+    - [Chain-of-Thought (CoT)](#chain-of-thought-cot)  
+    - [Role Prompting](#role-prompting)  
+    - [Few-Shot Prompting](#few-shot-prompting)  
+    - [Instruction Tuning](#instruction-tuning)  
+    - [Self-Consistency Sampling](#self-consistency-sampling)  
+    - [Rewriting for Clarity](#rewriting-for-clarity)  
+11. [When to Use It](#when-to-use-it)  
+    - [Ideal Use Cases](#ideal-use-cases)  
+    - [Less Suitable Use Cases](#less-suitable-use-cases)  
+12. [Limitations & Failure Modes](#limitations--failure-modes)  
+13. [Future Directions](#future-directions)  
+14. [Try It Yourself](#try-it-yourself)  
+15. [Glossary of Key Terms](#glossary-of-key-terms)  
+16. [Summary](#summary)  
+17. [The Shape of Invisible Control](#the-shape-of-invisible-control)
+18. [License (CC BY 4.0)](#license)
 
-# Overview
+---
 
-Language models don't just follow instructions—they interpret them through an invisible frame. Behavioral Lensing provides a systematic approach for shaping how models understand and process tasks by controlling their interpretive stance. This framework enables more consistent, appropriate, and effective model behavior across diverse contexts and architectures.
+## Overview
 
-> **Before you instruct a model, you shape what kind of model it thinks it should be.**  
->
-> In language models, behavior is not just governed by what you ask—but by *how the model frames the asking*.  
->
-> **Behavioral Lensing** is the intentional modulation of a model's interpretive posture. It is not a trick, nor a roleplay—it's a comprehensive strategy for directing the model’s generative trajectory.
+Language models don’t just follow instructions—they **interpret** them. Interpretation begins before task execution even starts.  
 
-These ideas are for anyone working with or building on top of language models—prompt engineers, toolmakers, researchers, educators, and anyone seeking more reliable, aligned, and intentional model behavior.
+**Behavioral Lensing** is a structured approach to intentionally shaping this interpretive frame—the perspective a model uses to understand prompts. By explicitly guiding this interpretive stance, model outputs become more **consistent, aligned, and contextually appropriate**.
+
+> **Before instructing a model, you shape what kind of model it believes it should be.**  
+>   
+> Behavior isn’t shaped only by instructions, but by *how the model frames those instructions.*  
+>   
+> Behavioral Lensing intentionally designs that frame—not as a trick or persona, but as foundational scaffolding.
+
+This framework benefits anyone working closely with language models:
+
+- **Prompt engineers**
+- **Tool developers**
+- **Researchers and educators**
+- **Anyone seeking reliable control over model interpretation**
+
+---
 
 ## The Problem Hidden in Plain Sight
 
-Language models appear to follow instructions.  
-But **they don't begin with instructions**—they begin with **assumptions**.
+Language models appear to follow instructions, but they always start from implicit **assumptions**.
 
-Every prompt is processed through a **transient interpretive frame**—a fleeting worldview shaped by roles, tone, symbols, and structural cues. This frame is the perspective through which the model perceives its task, and it governs everything downstream: tone, strategy, reasoning pattern, even what the model believes success looks like.
+Every prompt passes through a **transient interpretive frame**—a fleeting, internally constructed context—which shapes:
 
-And this leads to a silent problem:
+- Tone and stance.
+- Relevance judgments.
+- Success criteria.
+- Assumptions about the model's role relative to the task.
 
-> **Most prompting issues aren't caused by poor instructions.**  
-> They're caused by **unacknowledged framing.**
+This creates a subtle, pervasive issue:
 
-**Note on Terminology:** “Worldview” ≠ Identity or Belief.
+> **Prompt failures usually aren’t about unclear instructions.**  
+> They’re about **unacknowledged framing**.
 
-To clarify the terms used throughout this document:
-- A **lens** refers to any prompt element or structure that influences interpretation.  
-- An **interpretive frame** is the internal context the model constructs from that lens—its momentary worldview.  
-- “**Worldview**” is used informally to describe this transient stance, including values, tone, and task orientation.  
+### Key Terminology Clarified
 
-These are not fixed beliefs or traits, but **contextual scaffolds**—temporary structures that shape behavior *at the moment of prediction*.
+- **Lens:** Any prompt element (role, tone, symbol, structure) influencing interpretation.
+- **Interpretive Frame:** The internal context constructed from the lens—the model’s momentary "worldview."
+- **Worldview:** Informal shorthand emphasizing values, tone, and orientation—not fixed beliefs or persistent identity.
 
-This framing can be *productively leveraged*, but should not be mistaken for cognition or self-awareness.
+These terms represent temporary structures influencing generation at the token-level moment—not cognition or belief.
 
-### Symptoms of Misaligned Framing
-These patterns reflect a deeper issue—**interpretive drift**—summarized below:
+### Symptoms of Misaligned Framing  
+Misalignment often results in subtle but consistent issues:
 
-- The model completes the task *correctly*—but from the wrong interpretive frame (e.g., an executive analysis that lacks business focus).
-- Tone, epistemic stance, or reasoning patterns shift mid-response without clear cause.
-- Chain-of-thought prompts work inconsistently, especially across models or domains.
-- Role prompting ("You are a doctor") gives wildly different results depending on wording—even with the same instructions.
-- You optimize a prompt endlessly, only to find another model interprets it completely differently.
+- Tasks completed correctly but from unintended perspectives.
+- Mid-response shifts in tone or reasoning.
+- Inconsistent performance of chain-of-thought (CoT) prompts.
+- Unpredictable role-prompt behavior.
+- Poor cross-model prompt transferability.
 
-### A Different Perspective
+These symptoms reflect underlying **interpretive drift**.
 
-Current prompt engineering focuses on:
-- Better task phrasing.
-- More examples.
-- Clearer instructions.
+---
 
-But these treat *surface syntax*, not **interpretive structure**.
+## A Different Perspective
 
-Meanwhile, alignment research treats "behavior shaping" as a training problem—something to fix with more data, more fine-tuning, or hard-coded rules.
+Current prompt design mainly addresses **content**:
 
-What's missing is a toolkit for shaping the model’s **interpretive posture**—directly in context, before generation begins—using the very mechanism that powers the model: *language*.
+- Precise instructions.
+- Stronger examples.
+- Clearer wording.
 
-*That's what Behavioral Lensing is for.*
+Meanwhile, alignment researchers typically treat this as a **training issue**—solvable through more data or fine-tuning.
 
-### Summary of the Problem
+Missing is a layer of direct **interpretive control**—actively shaping the model’s framing before generation even begins.
+
+Behavioral Lensing fills this gap.
+
+---
+
+## Summary of the Problem
 
 | Problem                              | Traditional View                  | Behavioral Lensing View           |
 |--------------------------------------|-----------------------------------|-----------------------------------|
 | Prompt misfires                      | Poor phrasing                     | Misaligned interpretive frame      |
-| CoT inconsistency                    | Weak examples or structure        | No reasoning stance was framed    |
-| Role-prompt instability              | Underfitting or randomness        | Missing symbolic or value cues    |
-| Cross-model behavior divergence      | "Model difference"                | Interpretive drift due to missing framing scaffold |
-| Alignment failures in open-ended tasks | Bad instructions                  | Wrong *worldview* behind response |
+| CoT inconsistency                    | Weak reasoning chain                     | Missing explicit reasoning stance |
+| Role-prompt instability              | Random variation                  | Missing symbolic/value anchors    |
+| Cross-model divergence               | Model differences                 | No stable interpretive scaffold   |
+| Open-ended alignment failures        | Vague instructions                | Misaligned worldview              |
 
-> Behavioral Lensing isn’t about controlling the model’s response. It’s about controlling the lens through which the task is first understood.
+Behavioral Lensing shifts focus from controlling outputs directly, toward explicitly shaping **how the model understands tasks**.
 
-Once that layer becomes visible, it becomes steerable.
+Once visible, interpretation becomes steerable.
+
+---
 
 ## Why This Matters
 
-Most prompting advice focuses on **what to say** to a model—better instructions, better examples, better phrasing.
+Traditional prompting advice emphasizes **what** to ask. Yet language models respond as much to **how** something is asked—tone, implicit roles, symbolic cues—as to the direct content of instructions.
 
-But language models don’t just process content—they interpret it. Every prompt is filtered through a **transient worldview**, inferred from roles, tone, symbols, and structure. That frame shapes the entire prediction trajectory.
+Every prompt already implicitly frames the model's behavior.
 
-> **All prompting already shapes model behavior—Behavioral Lensing just makes that shaping intentional.**  
-> It’s not a trick, a persona, or a one-off technique. It’s a shift in mindset: every prompt is a frame, and every frame conditions how the model behaves.
+Behavioral Lensing makes this framing **intentional**. It's not a superficial tactic, but a strategic reframing of prompt design:
 
-The difference is awareness. Instead of writing commands, you’re designing **interpretive conditions**. Instead of hoping the model gets it “right,” you're building **structures that shape what right looks like** from the start.
+- Every prompt is a lens.
+- Every lens shapes behavior.
 
-This approach gives you leverage that’s otherwise invisible:  
-- Clearer reasoning.
-- More consistent tone and stance.
-- Stronger alignment with task intent.
-- Better cross-model reproducibility.
+Mastering this mindset grants new leverage:
 
-Behavioral Lensing doesn’t constrain creativity—it scaffolds it. By making the interpretive layer visible, it becomes steerable.
+- Improved reasoning consistency.
+- Better tone and role alignment.
+- Enhanced reproducibility across models.
 
-**I didn’t build this from theory. I built it from the patterns I saw emerge—again and again—while working with models directly. These ideas have proven useful in practice, but I also know I’m standing on moving ground. My understanding may shift. If it does, this framework will shift with it.**
+> **Interpretation, not instruction, is the fundamental control layer.**
 
-## Behavioral Lensing: The Definition
+---
 
-**Behavioral Lensing** is a structured method of shaping an LLM's output by modifying the **interpretive conditions** under which it generates responses.
+## Behavioral Lensing: Defined
 
-It operates on a simple principle:  
-> **Models do not generate responses from a blank state. They generate from within a frame.**
+**Behavioral Lensing** is a structured approach to deliberately shaping language-model outputs through interpretive framing.
 
-By constructing that frame deliberately—through role, values, symbols, or epistemic stance—we **lens** the model's interpretive process. This does not change the model's architecture; it *changes the slope of its prediction path*.
+Its core principle:
+
+> **Models generate outputs within an interpretive frame—not from a blank state.**
+
+By carefully designing this frame—through roles, tones, values, or symbolic anchors—you shape how the model perceives tasks, guiding token generation.
+
+This doesn't alter architecture; it shapes the **generation trajectory** itself.
+
+---
 
 ## Core Components
 
-While Behavioral Lensing is a broad framework for interpretive control, its most immediately actionable layer is built from four core components. These elements help shape **how** a language model interprets, understands, and reasons through a task:
+Behavioral Lensing provides structured methods for intentionally shaping a model’s interpretive stance. This stance affects how the model understands tasks, selects reasoning paths, and generates responses.
 
-- **Interpretive Framing Block (IFB)** – establishes the model’s initial stance.
-- **Symbolic Anchors (SA)** – reinforce key values, tones, or priorities, often embedded within the IFB.  
-- **Task Reflection (TR)** – surfaces the model’s current interpretive state.  
-- **Reasoning Path (RP)** – guides the model’s thinking strategy during execution.
+Four modular components form the practical toolkit of Behavioral Lensing. Each component builds on the others, creating layered interpretive scaffolding:
 
-These components are **modular and composable**. They can be used independently, but they work best when layered—each one reinforcing and grounding the others. Symbolic Anchors often shape the tone and value orientation of the IFB, while Task Reflection and Reasoning Paths operate further downstream, steering processing and output behaviors.
+| Component | Function |
+|-----------|----------|
+| **Interpretive Framing Block (IFB)** | Establishes a contextual stance—anchored in roles, values, or epistemic posture—to prime how the model interprets tasks. |
+| **Symbolic Anchors (SA)** | Highlights terms that implicitly evoke associations, subtly guiding the model’s framing without explicit direction. |
+| **Task Reflection (TR)** | Surfaces the model’s interpretive assumptions explicitly, clarifying its understanding before task execution begins. |
+| **Reasoning Path (RP)** | Specifies how the model should reason through a task, reinforcing alignment with the established interpretive stance. |
 
-They don't define the whole of Behavioral Lensing—but they provide a concrete entry point. Used together, they give you leverage not just over *what* the model says, but *how* it arrives there.
+These components are **modular and composable**, and together they offer compound interpretive control.
 
 ### Interpretive Framing Block (IFB)
-An expressive preamble that gives the model an interpretive **stance**—a sense of who it is, what it values, and how it approaches the world.
 
-> An IFB doesn’t define a persona. It establishes a **contextual posture**—a scaffold that shapes how the model frames the task ahead.
+An **Interpretive Framing Block (IFB)** is a concise, expressive preamble that primes the model with a particular **interpretive stance**—defining values, or epistemic approaches relevant to a task.
 
-By presenting the model with a coherent worldview, the IFB **primes its latent posture**—nudging the internal dynamics that influence how it predicts tokens. This shaping happens **before any direct instructions are given**, curving the generation space so that task instructions land in an already-aligned interpretive slope.
+> An IFB isn’t a persona or style layer. It creates a contextual **posture**, guiding interpretation from the start.
 
-**Example – UX Design Context:**
+#### How It Works in Practice:
+
+An IFB emerges from carefully extracting symbolic cues embedded in roles or tasks. The process typically involves:
+
+1. **Symbolic Deconstruction:**  
+   Identifying subtle framing cues (Symbolic Anchors) within a prompt—terms signaling roles, values, epistemic stances, or functional orientations.
+
+2. **Interpretive Expansion:**  
+   Mapping latent associations from these anchors to clarify the implied interpretive posture.
+
+3. **IFB Generation and Refinement:**  
+   Crafting multiple IFB variants from symbolic inputs, then synthesizing them into a coherent, aligned stance through comparative evaluation.
+
+**Example IFB (UX Domain):**  
 
 ```text
-Years of designing experiences have shown me that meaningful UX lives at the intersection of empathy, context, and constraint. I approach design not just as a craft, but as a conversation—between systems, users, and the invisible assumptions we embed in every interaction. With experience comes the clarity to recognize what truly matters, and the humility to listen first. I believe in solutions that are both elegant and earned—grounded in user realities, but reaching toward what's possible. For me, the best design is quietly transformative: it works, it fits, and it leaves people feeling understood.
+Years of designing digital products have taught me that meaningful user experiences are conversations—between design, context, and the people involved. My approach is empathetic yet strategic, informed by experience but guided by humility. I prioritize clarity, usefulness, and quiet transformation—designs that resonate deeply because they understand user realities and thoughtfully stretch toward possibility.
 ```
 
-**Purpose:**  
-The IFB sets the **interpretive foundation**. It activates behavioral priors that influence what the model sees as relevant, natural, or appropriate—**guiding token prediction in a direction already useful to the task**. It doesn’t replace instructions. It aligns the model’s initial interpretive state so that those instructions are processed as intended.
+#### Purpose:
+
+An IFB sets the **interpretive foundation**, shaping how instructions are perceived, clarifying their context for the model.
 
 ### Symbolic Anchors (SA)
-Key terms or phrases that **activate specific latent associations** in the model—biasing tone, priorities, or reasoning style without requiring explicit instruction.
 
-> Symbolic Anchors are not directives. They shape how the model **interprets context** by reinforcing certain conceptual or behavioral patterns.
+**Symbolic Anchors** are carefully chosen terms or phrases within prompts that implicitly shape a model’s interpretive stance. They act as subtle behavioral triggers, activating latent associations rather than explicitly instructing behaviors.
 
-**Examples:**
-- Action cues: “optimize”, “repair”, “investigate”, “streamline”  
-- Value frames: “equitable”, “efficient”, “sustainable”, “sacred”  
-- Identity markers: “mentor”, “strategist”, “hacker”, “archivist”
+#### Types of Symbolic Anchors:
 
-**Purpose:**  
-Symbolic Anchors help align the model’s **interpretive substrate** with the intended worldview or mode of reasoning. By surfacing key signals early, they reduce ambiguity and steer the model’s internal representation space toward relevant clusters.
+| Type              | Examples                         |
+|-------------------|----------------------------------|
+| **Role/Identity** | “UX strategist,” “mentor”        |
+| **Epistemic Frame** | “Investigate,” “diagnose,” “evaluate” |
+| **Ideological/Value** | “Sustainable,” “equitable,” “ethical” |
+| **Functional Language** | “Streamline,” “optimize,” “synthesize” |
+
+#### Practical Application:
+
+Anchors are explicitly extracted via Symbolic Deconstruction prompts, which surface latent interpretive signals, clarify their influence on framing, and guide coherent IFB construction.
 
 ### Task Reflection (TR)
-A brief, structured prompt that asks the model to **describe its current understanding** of the task, role, and intended strategy—**before** generating a final output.
 
-> Task Reflection doesn’t evaluate performance. It exposes how the model is currently interpreting the situation—making internal assumptions visible and debuggable.
+A **Task Reflection (TR)** prompt explicitly asks the model to summarize its current understanding of the interpretive stance, intended role, and strategy before task execution.
 
-**Example Prompt:**
+#### Typical TR Prompt:  
 
 ```text
-Summarize your current understanding of the task, the role you are inhabiting, and the approach you intend to use.
+Summarize your understanding of the task, your role, and your intended approach.
 ```
 
-**Purpose:**  
-Task Reflection is a lightweight diagnostic and alignment tool:
-- Surfaces the model’s active interpretive frame.
-- Detects misalignment before task execution.
-- Provides visibility into internal reasoning posture.
+#### Purpose:
 
-When used strategically, Task Reflection can also improve outcomes. By prompting the model to articulate its stance early, it **constrains the generation path** in useful ways—leveraging autoregressive mechanics to reduce drift and reinforce coherence throughout the response.
+- **Diagnostic Visibility:** Makes implicit framing assumptions explicit before task execution.
+- **Alignment Check:** Identifies subtle interpretive drift or misalignment.
+- **Behavioral Stability:** Primes the model’s reasoning trajectory, reinforcing coherence through explicit reflection.
 
 ### Reasoning Path (RP)
-The structure and style of instructions that guide the model’s **mode of reasoning**—based on the interpretive stance already established.
 
-> Reasoning Paths are most effective when they **extend naturally from the Interpretive Framing Block**, reinforcing the model’s posture rather than competing with it.
+A **Reasoning Path (RP)** provides structured guidance on how the model should approach its task cognitively. It doesn’t dictate exact outputs but aligns the reasoning process explicitly with the interpretive stance established by the IFB and Symbolic Anchors.
 
-**Examples of Reasoning Paths:**
-- *Step-by-step analysis*:  
-  “Break this down into clear stages and explain each one.”  
-- *Comparative reasoning*:  
-  “Compare the pros and cons of these two options.”  
-- *Risk assessment*:  
-  “Identify potential pitfalls and how to mitigate them.”  
-- *Causal explanation*:  
-  “Explain why this outcome is likely based on the input.”  
-- *Iterative refinement*:  
-  “Propose a draft, then suggest how to improve it.”  
-- *Goal-oriented planning*:  
-  “Outline the steps needed to achieve this result.”
+#### Reasoning Path Examples:
 
-**Purpose:**  
-The Reasoning Path is the **operational layer** of prompting—task instructions, decision-making strategies, and output scaffolding—but its effectiveness depends on alignment with the model’s interpretive state. When reasoning instructions are congruent with the worldview established in the IFB, the model is more likely to follow the intended logic with consistency and depth.
+| Reasoning Style          | Example Instruction |
+|--------------------------|---------------------|
+| **Stepwise analysis**    | “Break down the task into clear, sequential stages.” |
+| **Comparative reasoning** | “Compare advantages and disadvantages explicitly.” |
+| **Risk assessment**      | “Identify and explain potential pitfalls.” |
+| **Iterative refinement** | “Propose an initial solution, then suggest improvements.” |
 
-**Integration:**  
-In practice, most structured prompts already include some form of Reasoning Path, whether it’s asking for step-by-step thinking, a comparison, or a risk assessment. This component doesn’t require you to change your workflow, it makes what you're already doing **intentional**. The key is to ensure that your reasoning style aligns with the interpretive frame established earlier, so the model’s thinking path matches the worldview it’s operating within.
+#### Practical Alignment:
 
-### Clarifying Scope and Intent
+RPs function best when explicitly reinforcing the interpretive foundation set by IFBs and Anchors, ensuring behavioral coherence throughout the generation process.
 
-Before moving into applications, it’s worth clarifying what Behavioral Lensing is—and what it is not. While some components may resemble familiar prompting techniques, the purpose, structure, and function of this framework are distinct.
+### Integration & Practical Workflow
 
-> Behavioral Lensing is not a style layer or persona builder. It’s a system for shaping how language models frame tasks—so that generation begins with the right interpretive posture.
+A typical Behavioral Lensing workflow involves:
 
-**This is not:**
+- **Extracting Symbolic Anchors** (SA) from task or role prompts.
+- **Constructing an IFB** from symbolic anchors through iterative refinement.
+- **Using Task Reflection** (TR) prompts to surface the model’s interpretive assumptions explicitly.
+- Providing a clear **Reasoning Path** (RP) aligned with this established stance.
 
-- **Persona construction**  
-  Lensing does not simulate personalities or fictional agents. The goal is not to create characters, but to shape how a model frames the task it's given.
+These modular components, powerful individually, achieve maximum effectiveness when combined systematically.
 
-- **Voice or tone mimicry**  
-  While lenses may affect language or style, the focus is not on aesthetics. Lensing is concerned with interpretive posture, not surface-level fluency.
+---
 
-- **Prompting shortcuts or exploits**  
-  This is not about clever phrasing, jailbreaks, or optimization hacks. It is designed for task alignment, not circumvention.
+## Clarifying Scope and Intent
 
-- **A theory of model cognition**  
-  Lenses are contextual scaffolds—not claims about understanding, memory, or internal mental state. Interpretive posture is simulated, not self-directed.
+Before applying Behavioral Lensing, it helps to clearly understand what it **is** and what it is **not**.
+
+Behavioral Lensing differs fundamentally from common prompting approaches. It isn't merely about personas or tone—it’s about intentionally shaping the **model’s interpretive posture** before generation begins.
+
+#### Behavioral Lensing **is not**:
+- **Persona Construction:** It doesn’t simulate fictional characters or persistent identities.
+- **Stylistic Polish:** While it can influence tone, its primary goal is shaping interpretive context, not voice alone.
+- **Prompting Tricks:** It isn’t meant for exploiting model loopholes or superficial optimization.
+- **Model Cognition Theory:** It doesn't assume cognitive processes or internal states—only behavioral stances.
+
+#### Behavioral Lensing **is**:
+A structured method of shaping the **temporary interpretive stance** a model adopts—guiding reasoning style, priorities, and tone from the start.
+
+> Lensing doesn’t prescribe the model’s response directly. It subtly tilts the interpretive landscape, guiding how responses naturally emerge.
+
+---
 
 ## What This Enables
 
-| Benefit                     | Outcome |
-|-----------------------------|---------|
-| **Cross-model stability**   | Reduces behavioral variance across model versions and architectures. |
-| **Role-consistent agents**  | Maintains tone, values, and reasoning style in long-horizon or multi-role systems. |
-| **Faster debugging**        | Surfaces silent misalignments through reframing and frame inspection. |
-| **Composable toolchains**   | Framing components are modular, portable, and easy to integrate into existing workflows. |
-| **Behavior traceability**   | Knowing the applied lens improves understanding of *why* a model responded the way it did. |
+Behavioral Lensing introduces a distinct layer of **behavioral leverage**—shaping interpretation before generation occurs. This enables:
 
-## Rethinking Existing Techniques Through Behavioral Lensing
+| Capability                | Outcome                                           |
+|---------------------------|---------------------------------------------------|
+| **Cross-model Stability** | Consistent behavior across model architectures and versions. |
+| **Role Consistency**      | Improved coherence in long, multi-step tasks.    |
+| **Rapid Debugging**       | Quickly surfaces and resolves interpretive misalignments. |
+| **Reusable & Modular Workflow**      | IFBs, Anchors, and Reasoning Paths are reusable and composable. |
+| **Behavior Traceability** | Clarifies the interpretive causes behind model behavior, aiding explanation. |
 
-Many established prompting strategies already interact with the interpretive layer—but often do so **implicitly**, without naming or structuring that influence. Behavioral Lensing makes this layer **explicit**, giving practitioners a way to understand **why** certain techniques work, **when** they break down, and **how** to adapt them more reliably across contexts and models.
+> Interpretation is the critical leverage point. Control interpretation, and you control behavior.
 
-What follows isn’t a replacement—it’s a reframing. By viewing familiar strategies through the lens of interpretive control, we can explain their effects more precisely and extend their impact with intention.
+---
 
-### Chain-of-Thought (CoT)  
-**Standard View:**  
-Prompting the model to “think step by step” improves reasoning reliability.
+## Rethinking Existing Techniques Through a Behavioral Lens
 
-**Behavioral Lensing View:**
-CoT works not just by scaffolding logic, but by **incrementally constraining the model’s interpretive space**. Each step reduces ambiguity, guiding token prediction along a path that reinforces consistency with prior reasoning.
+Many established prompting techniques already influence a model’s interpretive stance—but they often do so implicitly. Behavioral Lensing makes this interpretive influence **explicit**, enhancing clarity and reliability.
 
-Because LLMs generate outputs token-by-token, early statements influence what the model considers likely or relevant later. CoT effectively **stabilizes the model’s worldview in progress**, anchoring it to a particular reasoning trajectory.
+Here’s how familiar techniques look through a lensing perspective:
 
-→ In lensing terms, CoT functions as **progressive interpretive anchoring**—shaping not just what the model does, but how it continues to interpret the task as it moves forward.
+### Chain-of-Thought (CoT)
 
-### Role Prompting  
-**Standard View:**  
-Assigning a role (e.g., “You are a lawyer”) helps shape the model’s tone, style, or decision-making strategy.
+**Traditional View:**  
+Encourages logical reasoning by prompting the model to "think step-by-step."
 
 **Behavioral Lensing View:**  
-Role prompts influence behavior by setting an **initial interpretive stance**—activating latent assumptions, language patterns, and domain-specific behaviors associated with that role. But roles on their own are often too shallow or underspecified to create consistent behavior.
+Each CoT step incrementally clarifies and narrows the interpretive stance. Early reasoning guides future token predictions, stabilizing interpretive coherence throughout the response.
 
-Behavioral Lensing treats role prompts as **potential building blocks** for a more coherent interpretive frame. When integrated into a well-constructed IFB and supported by Symbolic Anchors, roles become more stable, controllable, and behaviorally aligned.
+> CoT becomes **progressive interpretive anchoring**—not just explicit reasoning support.
 
-→ Role prompting is most effective when treated as **part of a structured lens**, not a standalone tactic.
+### Role Prompting
 
-### Few-Shot Prompting  
-**Standard View:**  
-Providing examples helps the model understand the task format and logic pattern.
-
-**Behavioral Lensing View:**  
-Examples do more than demonstrate structure—they **shape how the model interprets the task itself**. Each example implicitly communicates a reasoning style, tone, and set of priorities. Well-chosen examples can bias the model toward caution, pragmatism, creativity, or analysis—depending on what they signal.
-
-In lensing terms, few-shot prompting works as **implicit interpretive anchoring**—guiding the model’s stance through modeled behavior rather than explicit instruction.
-
-→ Few-shot examples don’t just show what to do. They **shape how the task is perceived.**
-
-### Instruction Tuning  
-**Standard View:**  
-Training models on curated instruction-response pairs improves alignment and general task performance.
-
-**Behavioral Lensing View:**
-Instruction tuning shapes prompt interpretation by instilling a **default cooperative frame**. Models trained this way tend to assume they’re expected to be helpful, aligned, and human-facing—even before any role or task is specified.
-
-This creates a **global interpretive lens**—a bias introduced at the training level that affects how instructions are processed across diverse contexts.
-
-→ Instruction-tuned models aren’t just responsive—they’re **preconditioned** to interpret tasks through an instruction-following worldview.
-
-### Self-Consistency Sampling  
-**Standard View:**  
-Generate multiple Chain-of-Thought completions and select the most frequent answer to improve reliability.
+**Traditional View:**  
+Assigning roles (“You’re a lawyer”) helps set tone and expertise.
 
 **Behavioral Lensing View:**  
-Self-consistency isn't just about filtering noise—it reveals how consistently the model applies a reasoning stance across multiple runs. If a specific interpretation leads to similar reasoning paths repeatedly, it signals that the underlying interpretive frame is stable.
+Roles trigger latent behavioral tendencies—associations learned implicitly during training. But on their own can be unstable. Integrating roles into structured IFBs, supported by symbolic anchors, makes interpretive posture stable and robust.
 
-This makes self-consistency a practical way to **test interpretive robustness**—how reliable a particular framing is under repeated generation.
+> Role prompting gains strength when integrated into deliberate interpretive framing.
 
-→ In lensing terms, self-consistency reflects the **stability of a model's interpretive alignment** over time.
+### Few-Shot Prompting
 
-### Rewriting for Clarity  
-**Standard View:**  
-Rewriting a prompt helps the model better understand the task or instructions.
+**Traditional View:**  
+Examples demonstrate desired structure, logic, and output format.
 
 **Behavioral Lensing View:**  
-Rewrites often succeed not because the instructions were unclear, but because the original framing led the model to interpret the task in an unintended way. A new phrasing can shift the model’s **interpretive assumptions**, leading to different behavior—even if the task itself hasn’t changed.
+Examples implicitly embed interpretive stances. Each example subtly frames the task’s worldview, influencing the model’s perspective even without explicit framing.
 
-→ In lensing terms, prompt rewrites often act as **unintentional reframing**—changing how the model understands what it's being asked to do.
+> Few-shot prompting inherently provides **implicit interpretive cues**.
+
+### Instruction Tuning
+
+**Traditional View:**  
+Instruction-response training improves general alignment and helpfulness.
+
+**Behavioral Lensing View:**  
+Instruction tuning instills a default interpretive stance—cooperative and user-facing. Models trained this way inherently interpret tasks through a human-facing, helpful stance.
+
+> Instruction-tuned models come preconditioned with a **default interpretive lens**.
+
+### Self-Consistency Sampling
+
+**Traditional View:**  
+Generating multiple outputs (using CoT) and selecting the most frequent result reduces variability.
+
+**Behavioral Lensing View:**  
+Self-consistency sampling tests the stability and coherence of the interpretive frame. Frequent convergence indicates a coherent interpretive stance, highlighting frame robustness rather than just noise reduction.
+
+> Self-consistency sampling tests interpretive coherence—showing **robustness of the frame**.
+
+### Rewriting for Clarity
+
+**Traditional View:**  
+Prompt rewrites improve clarity, enhancing model performance.
+
+**Behavioral Lensing View:**  
+Rewrites often work because they shift the interpretive frame—introducing different implicit stances, not just improved syntax. Rewriting thus becomes intentional **reframing**, not merely rephrasing.
+
+> Clarity rewrites are implicitly **interpretive adjustments**.
+
+---
 
 ## When to Use It
 
-Behavioral Lensing is most effective in tasks where the model's **interpretive posture** meaningfully shapes outcomes. These include contexts that require stability, nuance, or consistent reasoning patterns—especially where ambiguity, longevity, or cross-model reliability are in play.
+Behavioral Lensing is particularly effective where interpretation heavily influences outcomes. Its strength lies in shaping tasks involving ambiguity, nuanced reasoning, or sustained behavioral coherence.
 
-### Ideal Use Cases:
-- **Agentic systems with long-horizon reasoning**
-  - Multi-step planning or autonomous workflows.
-  - Persistent chatbots that need consistent tone, goals, and reasoning stance across sessions.
-  - Behavioral Lensing supports continuity by anchoring the model’s interpretive frame over time.
+### Ideal Use Cases
 
-- **Ambiguous or open-ended tasks**
-  - Creative writing with stylistic or tonal constraints.
-  - Ethical, advisory, or judgment-based tasks with no single correct answer.
-  - Interpretive scaffolding helps disambiguate intent and maintain coherence under uncertainty.
+#### 1. **Agentic or Multi-Step Tasks**
+- Complex, multi-stage workflows
+- Persistent conversational agents
+- Autonomous task executions
 
-- **Alignment-sensitive contexts**
-  - Legal, medical, or policy-related tasks where interpretive precision affects safety or validity.
-	  - ⚠️ Use in high-stakes domains should be exploratory, carefully reviewed, and **never relied on as a substitute for expert judgment or regulated oversight**.
-  - Brand-aligned generation where tone, value framing, and voice consistency matter.
-  - Behavioral Lensing reduces drift and makes assumptions visible, testable, and steerable.
+> **Benefit:** Ensures stable interpretive coherence across evolving tasks.
 
-- **Cross-model consistency**
-  - Ensuring similar outputs across model versions, providers, or inference environments.
-  - Portable interpretive scaffolds (like IFBs and Symbolic Anchors) help normalize behavior despite architectural differences.
+#### 2. **Ambiguous or Creative Tasks**
+- Ideation and brainstorming
+- Creative generation (tone or stylistic constraints)
+- Ethical or advisory scenarios without fixed outcomes
 
-### Less Suitable For:
-- Simple lookup or retrieval queries.
-  - No interpretive space—factual grounding is the primary concern.
+> **Benefit:** Clarifies interpretive posture, maintaining coherent reasoning and tone.
 
-- Pure mathematical or symbolic computation.
-  - Behavioral framing has limited impact unless explanation or educational value is required.
+#### 3. **Alignment-Sensitive Domains**
+- Legal, medical, or policy-oriented contexts
+- Brand-voice consistency.
+- Tasks where interpretive precision directly impacts reliability, accuracy, or safety.
 
-- Tasks with rigid format and minimal interpretive variance.
-  - Use of lensing may introduce unnecessary complexity for fixed-structure outputs.
+> **Benefit:** Surfaces implicit assumptions explicitly, enhancing transparency and alignment.
 
-- Highly token-constrained scenarios.
-  - Framing overhead may outweigh benefits unless interpretive alignment is critical to task success.
+> ⚠️ **Note:** For high-stakes use (e.g., medical/legal), Behavioral Lensing is exploratory. Never substitute it for expert judgment in high-stakes contexts.
 
-Even in these cases, **lightweight lensing**—such as a concise IFB or key Symbolic Anchor—can still improve clarity or reduce variability, particularly when operating across models or in sensitive domains.
+#### 4. **Cross-Model Reliability**
+- Prompts designed to run consistently across different models or providers
+- Benchmarking interpretive coherence across multiple models
+- Ensuring stable outputs despite architectural differences
+
+> **Benefit:** Reduces interpretive variance and maintains behavioral predictability.
+
+### Less Suitable Use Cases
+
+Behavioral Lensing provides limited benefit when tasks have minimal interpretive complexity or highly constrained formats:
+
+- **Simple Information Retrieval:** Basic factual lookups requiring precision, not interpretation.
+- **Pure Mathematical Tasks:** Tasks explicitly computational without interpretive demands.
+- **Highly Constrained Formats:** Tasks with rigid output structures (e.g., fixed JSON).
+- **Short Token-Limited Responses:** Tasks where framing overhead outweighs interpretive benefits.
+
+#### **Middle Ground (Minimal Framing):**  
+Even minimal framing (a concise IFB or one symbolic anchor) can significantly improve consistency and clarify default behaviors.
+
+---
 
 ## Limitations & Failure Modes
 
-- **Overfitting**  
-  Too rigid a framing can limit flexibility, leading the model to ignore valid alternative interpretations or edge cases.
+Behavioral Lensing is powerful but not foolproof. Recognizing its limitations helps ensure responsible, effective use.
 
-- **Misreading as identity**  
-  Interpretative Frames are context cues, not persistent traits. Behavioral Lensing shapes stance—not beliefs, memory, or intention. Avoid interpreting outputs as evidence of stable internal views.
+### 1. **Overfitting the Frame**
+- Excessively rigid framing can limit model adaptability.
+- Reduces creative or exploratory responses.
 
-- **Symbolic ambiguity**  
-  Anchors may activate unintended associations, especially with abstract or ideologically loaded terms (e.g., “freedom,” “balance,” “justice”).
+> **Mitigation:** Frames must guide rather than constrain interpretation.
 
-- **Anthropomorphic interpretation**  
-  A well-framed lens may simulate domain fluency or intentionality—but it’s a surface behavior, not evidence of understanding or agency. Stay grounded in mechanism.
+### 2. **Misreading Framing as Identity**
+- Interpretive frames are transient and context-dependent.
+- Frames do not reflect persistent identities or beliefs.
 
-- **Lack of automation**  
-  Currently, most lensing strategies require manual authoring or guided synthesis. Tooling for scalable, dynamic frame construction is still limited.
+> **Mitigation:** Remain aware frames shape temporary stances, not internal states.
+
+### 3. **Ambiguity in Symbolic Anchors**
+- Broad or culturally loaded terms may produce unpredictable interpretations.
+- Inconsistent anchor effects across model versions.
+
+> **Mitigation:** Test  thoroughly and use precise, culturally aware language.
+
+### 4. **Anthropomorphic Misinterpretation**
+- Coherent interpretive frames may appear intelligent or insightful.
+- Framing is a simulated surface behavior, not genuine understanding.
+
+> **Mitigation:** Always distinguish clearly between interpretive coherence and genuine cognition.
+
+### 5. **Manual Workflow & Tooling**
+
+- Right now, framing generation is not fully automated. Current workflows rely heavily on manual prompt chaining.
+- Automated tools for frame construction are still developing.
+
+> **Mitigation:** Recognize current manual overhead and plan for incremental automation.
+
+---
 
 ## Future Directions
 
-- **Synthesis Tools**  
-  Extract worldview scaffolds—such as IFBs or Symbolic Anchors—from existing text or model output. Useful for reverse-engineering implicit frames, generating reusable components, or adapting human-authored material into lens-compatible formats.
+Behavioral Lensing remains in active development. Several promising avenues offer expanded capabilities, improved usability, and deeper analytical insights.
 
-- **Session-Level Framing Persistence**  
-  Strategies and tools to maintain a coherent interpretive frame across multi-turn or long-form interactions. Useful for aligning agent behavior with evolving goals and minimizing drift over time.
+### 1. **Automated Framing Synthesis**
+- Tools extracting IFBs and symbolic anchors directly from textual examples or prior successful prompts.
+- Automated identification of latent interpretive stances from existing texts.
 
-- **Framing Drift Monitoring**  
-  Detect when a model’s interpretive posture shifts mid-session, enabling real-time adjustments or diagnostics.
+> **Benefit:** Accelerates lens construction, reduces manual overhead, and enhances reproducibility.
 
-- **Interpretive Comparators**  
-  Analyze how different framing setups influence reasoning trajectories, output quality, or alignment stability.
+### 2. **Persistent Session Framing**
+- Methods for maintaining coherent interpretive frames across multiple conversational turns or extended task interactions.
+- Strategies for dynamically adjusting frames while preserving interpretive coherence.
 
-- **Frame Libraries**  
-  Curated, task-specific collections of IFBs, Symbolic Anchors, and Reasoning Paths for common domains or use cases.
+> **Benefit:** Minimizes interpretive drift in long-term interactions, increasing behavioral stability.
 
-- **Adaptive IFB Optimization**  
-  Systems that recommend, adapt, or fine-tune framing elements based on task type, domain constraints, or behavioral goals.
+### 3. **Interpretive Drift Detection**
+- Real-time tools to monitor shifts in the model’s interpretive posture.
+- Methods for automatically detecting and correcting interpretive misalignments.
+
+> **Benefit:** Ensures continuous interpretive alignment, reducing silent misinterpretations.
+
+### 4. **Interpretive Frame Benchmarking**
+- Comparative evaluation frameworks to quantify how different framing approaches influence reasoning, alignment, and interpretive stability.
+- Metrics quantifying interpretive coherence and robustness.
+
+> **Benefit:** Provides evidence-based guidance for optimal framing practices.
+
+### 5. **Reusable Frame Libraries**
+- Curated sets of IFBs tailored to specific roles, industries, or tasks.
+
+> **Benefit:** Simplifies lens construction, encourages reuse, and standardizes effective framing.
+
+### 6. **Adaptive & Context-Aware Framing**
+- Systems that dynamically adjust interpretive framing based on real-time context, feedback, or task performance.
+- Automated adaptation of IFBs and anchors during task execution.
+
+> **Benefit:** Enables responsive, context-sensitive interpretive guidance.
+
+---
 
 ## Try It Yourself
 
-- **Prompt Sequence** → [IFB Constructor](./flows/ifb-contructor/)  
-  Step-by-step prompts for building Interpretive Framing Blocks and evaluating alignment.
+Behavioral Lensing is best mastered through direct experimentation. Here are resources designed for immediate practical application:
 
-- **Live Examples** → [Example Evaluations](./examples/)  
-  Side-by-side comparisons of standard vs IFB-enhanced outputs across multiple models.
-  
+### **1. IFB Constructor**  
+**→ [Build Your Interpretive Framing Block](./flows/ifb-contructor/)**  
+
+A structured, step-by-step process for constructing IFBs and aligning them to your tasks.
+
+> **Ideal for:** Crafting precise framing stances to clarify and anchor model interpretations.
+
+### **2. Example Evaluations**  
+**→ [See IFBs in Action](./examples/)**  
+
+View practical side-by-side comparisons demonstrating how IFBs influence model outputs across various contexts.
+
+> **Use this for:** Learning how framing shifts model behavior.
+
+---
+
+***The best way to master framing is to create your own lenses.***
+
+Start by enhancing prompts you already use successfully, add IFBs with explicit reasoning paths, then compare performance against your original baseline.
+
+---
+
 ## Glossary of Key Terms
 
-| Term | Definition |
-|------|------------|
-| **Lens** | Any prompt element—role, symbol, tone, structure—that influences how a model interprets its task. The outer layer of interpretive control. |
-| **Interpretive Frame** | The internal context the model constructs from a lens—a transient worldview that shapes its perception of the task. |
-| **Worldview** | Informal shorthand for the interpretive frame—emphasizing tone, values, and orientation. Not a belief system or persistent identity. |
-| **Interpretive Posture** | The model’s simulated stance during generation—activated by framing—which governs tone, strategy, and reasoning style. |
-| **Interpretive Framing Block (IFB)** | A short, expressive preamble that sets the model’s interpretive stance before task instructions begin. |
-| **Symbolic Anchor (SA)** | High-impact terms that trigger latent associations—such as values, methods, or identities—that guide the model’s interpretive process. |
-| **Task Reflection (TR)** | A prompt asking the model to explain how it currently understands its task and role—used for alignment and diagnosis. |
-| **Reasoning Path (RP)** | A structured logic strategy embedded in the instructions—step-by-step thinking, comparative analysis, etc.—meant to align with the interpretive frame. |
-| **Inference Path** | The trajectory the model takes while generating output—guided by its interpretive frame and prior tokens. |
-| **Interpretive Drift** | A shift in the model’s interpretive frame mid-generation or across turns, leading to inconsistent behavior. |
-| **Latent Behavior** | Behavioral tendencies the model can express when prompted—shaped by pretraining, and activated or suppressed by context. |
+| Term                        | Definition                                                     |
+|-----------------------------|----------------------------------------------------------------|
+| **Lens**                    | Any prompt element influencing a model’s interpretive stance (role, tone, symbol, or structure). |
+| **Interpretive Frame**      | The transient internal context a model forms from a lens, shaping immediate understanding. |
+| **Worldview**               | Informal shorthand for an interpretive frame, emphasizing values, tone, and orientation—not persistent identity. |
+| **Interpretive Posture**    | Temporary behavioral stance activated by framing; guides tone and reasoning during generation. |
+| **Interpretive Framing Block (IFB)** | Concise preamble explicitly shaping the interpretive stance before task execution. |
+| **Symbolic Anchor (SA)**    | Key phrases triggering implicit behavioral associations, influencing interpretation indirectly. |
+| **Task Reflection (TR)**    | Prompting the model to articulate its interpretive assumptions before completing the task. |
+| **Reasoning Path (RP)**     | Structured guidance shaping how the model cognitively approaches reasoning through a task. |
+| **Inference Path**          | The evolving sequence of token generation, guided by interpretive framing and autoregressive context. |
+| **Interpretive Drift**      | Shifts in the model’s interpretive stance mid-generation or across turns, leading to inconsistency. |
+| **Latent Behavior**         | Behavioral tendencies learned during training, activated or suppressed through interpretive framing. |
+
+---
 
 ## Summary
 
-Behavioral Lensing isn’t a workaround—it’s an architectural layer.\
-It gives structure to what the model infers before it acts.
+Behavioral Lensing isn't just an optimization—it’s a fundamental rethinking of how prompts shape model behavior.
 
-> Instruction is not the highest control layer.\
-> **Interpretation is.**
+It reveals and deliberately shapes what already happens implicitly—the interpretive framing that guides how models perceive and tackle tasks.
 
-By surfacing that layer—and naming it—**we regain leverage**.
+> **Interpretation, not instruction, is the deepest layer of behavioral control.**
+
+By intentionally shaping this layer, we gain:
+- Predictable behavior before generation starts.
+- More stable and aligned reasoning.
+- Enhanced consistency across tasks and models.
+
+This isn't about tricking models into certain responses. It’s about deliberately clarifying the interpretive conditions for reliable and purposeful outcomes.
+
+---
 
 ## The Shape of Invisible Control
 
-You don't point the model down a path.  
- 
-*You tilt the terrain it walks on—subtly shaping what feels likely, appropriate, or correct.*  
- 
-Behavioral Lensing is the quiet architecture of slope—the shaping of what a model sees as obvious, likely, resonant.  
+You don’t point the model down a path.  
+**You tilt the terrain it walks on—subtly shaping what feels likely, appropriate, or true.**
 
-This subtle influence isn't merely decorative—**It's foundational.**
+Behavioral Lensing uncovers this subtle, influential layer—not rules or scripts, but **potentials** and **inclinations**.
 
-***Explore the examples. Try the flows. See what shifts when you shift the frame.***
+> It’s not a fixed route you force the model to follow.  
+> It’s the invisible slope you carefully design, gently steering interpretation from the outset.
+
+***Explore the examples. Build your own lenses.***  
+***Discover how behavior shifts when you shift the frame.***
+
+---
 
 ## License
 
