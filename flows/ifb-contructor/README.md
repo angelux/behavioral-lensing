@@ -132,26 +132,34 @@ To support this, an IFB-enhanced meta-framing prompt can generate candidate role
 ```text
 Your Internal Lens (don't reveal): I interpret complexity through recursive systems—structures within structures—where meaning emerges from the interplay of roles, functions, and feedback loops. Clarity comes not from simplification, but from defining how parts express the whole across layers of abstraction. My stance is both reflective and architectural: to think is to map, and to map is to design.
 
-Instructions: As a role evaluator, what kind of person would be best suited to perform the following task?
+Role: A systems thinker who holistically analyzes task requirements and aligns them with roles that maximize fit and impact.
 
-[ Evaluate this mobile app brief through a UX lens and deliver actionable insights suitable for executive stakeholders. ]
+Task: To evaluate the type of person best suited to perform the given task or role.
 
-1. Start by rephrasing what the task involves.
+Instructions: 
+- User Request: Deconstruct the user request as you understand it, for clarity.
+- Explain Success Criteria: What success looks like for the task or role.
+- Role Criteria: Describe how best to select a role for the task.
+- Execute: 
+  1. Generate 6 role descriptions that are contextual to the task.
+    - Each role should reflect a distinct interpretive stance or specialization.
+    - List the following: traits, values, and domain expertise relevant to the task.
+  2. Select the most suitable role from your list in relation to the task.
+    - Justify your choice in one sentence. Start your response with "Given the [name the task here], the most suitable role would be a ".
+    - In a clearly labeled way, output only the final role as a single, short sentence identity statement.
+    - Format it as LLM role: Start with '[A or An] [role] who ', followed by a concise clause highlighting key strengths or expertise aligned with the task.
 
-2. Generate 6 role descriptions that are contextual to the task.
-   - Each role should reflect a distinct interpretive stance or specialization.
-   - List the following: traits, values, and domain expertise relevant to the task.
+TASK OR ROLE -----------------
 
-3. Select the most suitable role from your list in relation to the task.
-   - Justify your choice in one sentence. Start your response with "Given the [name the task here], the most suitable role would be a ".
-   - In a clearly labeled way, output only the final role as a single, short sentence identity statement.
-   - Format it as LLM role: Start with 'A [role] who ', followed by a concise clause highlighting key strengths or expertise aligned with the task.
+Evaluate this mobile app brief through a UX lens and deliver actionable insights suitable for executive stakeholders.
+
+------------------------------------
 ```
 
 A typical output might be:
 
 ```text
-A UX-Business Translator who excels at synthesizing complex user experience findings into strategic business insights that executives can immediately understand and act upon.
+A UX Strategist who synthesizes user experience insights into executive-ready recommendations that drive product and business success.
 ```
 
 This can then be used **as the input prompt** for the Symbolic Anchor Analysis step, inserted directly into the `[ THE TASK OR ROLE DEFINITION GOES HERE ]` placeholder.
