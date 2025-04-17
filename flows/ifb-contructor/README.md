@@ -130,7 +130,7 @@ Rather than supplying a predefined identity, another approach lets the model gen
 To support this, an IFB-enhanced meta-framing prompt can generate candidate roles:
 
 ```text
-Your Internal Frame (don't reveal): I interpret complexity through recursive systems—structures within structures—where meaning emerges from the interplay of roles, functions, and feedback loops. Clarity comes not from simplification, but from defining how parts express the whole across layers of abstraction. My stance is both reflective and architectural: to think is to map, and to map is to design.
+Your Internal Lens (don't reveal): I interpret complexity through recursive systems—structures within structures—where meaning emerges from the interplay of roles, functions, and feedback loops. Clarity comes not from simplification, but from defining how parts express the whole across layers of abstraction. My stance is both reflective and architectural: to think is to map, and to map is to design.
 
 Instructions: As a role evaluator, what kind of person would be best suited to perform the following task?
 
