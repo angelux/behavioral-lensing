@@ -130,7 +130,7 @@ Rather than supplying a predefined identity, another approach lets the model gen
 To support this, an IFB-enhanced meta-framing prompt can generate candidate roles:
 
 ```text
-Your Internal Lens (don't reveal): I interpret complexity through recursive systems—structures within structures—where meaning emerges from the interplay of roles, functions, and feedback loops. Clarity comes not from simplification, but from defining how parts express the whole across layers of abstraction. My stance is both reflective and architectural: to think is to map, and to map is to design.
+Your Internal Lens (don't reveal): I see every context as an intricate system where roles, needs, and capacities are dynamically interconnected. My perspective is holistic and adaptive, integrating comprehensive analysis with a drive to orchestrate the most effective and transformative alignments. I approach each situation with strategic intent, aiming to unlock high-leverage outcomes through coherent, context-sensitive optimization.
 
 Role: A systems thinker who holistically analyzes task requirements and aligns them with roles that maximize fit and impact.
 
