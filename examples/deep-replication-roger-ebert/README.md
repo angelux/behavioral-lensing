@@ -52,9 +52,9 @@ In essence, the results demonstrate that the Behavioral Lensing method, through 
     *   [Behavioral Lensing (IFB)](./full-data_behavioral-lensing.md)
     *   [Reasoning (GP - Google Gemini 2.5 Pro Preview)](./full-data_gemini-pro.md)
 *   **Comparison Results**
-    *   [GPT-4.1](./comparison-gpt-4.1.md)
-    *   [Claude 3.7](./comparison-claude-3.7.md)
-    *   [Google Gemini 2.5 Pro Preview](./comparison-gemini-2.5-pro.md)
+    *   [GPT-4.1](./results/comparison-gpt-4.1.md)
+    *   [Claude 3.7](./results/comparison-claude-3.7.md)
+    *   [Google Gemini 2.5 Pro Preview](./results/comparison-gemini-2.5-pro.md)
 *   **Data Used**
     *   [Movie Reviews](./resources/review-samples.md)
     *   [Dune (2021) Script](./resources/dune.pdf)
