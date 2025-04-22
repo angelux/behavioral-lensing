@@ -1,51 +1,58 @@
-# UX Evaluation of "WellNest" App Brief
+# UX Executive Brief Analysis: WellNest App
+## *Comparing Standard Prompts vs. Behavioral Lensing for Strategic Insight*
 
-This example demonstrates the use of **Behavioral Lensing** to shape model interpretation during a UX evaluation task. It compares outputs generated **with and without** an **Interpretive Framing Block (IFB)** across multiple language models.
+This example explores the application of **Behavioral Lensing** to enhance the quality and relevance of outputs for a specific, high-stakes task: evaluating a product brief from a User Experience (UX) perspective for executive stakeholders. It demonstrates how shaping the model's interpretation *before* processing the task can lead to more focused, actionable, and strategically aligned insights compared to standard prompting methods.
 
----
+## The Challenge & Goal
 
-## Task Summary
+The objective was to evaluate a synthetic mobile app brief ("WellNest," a wellness app for young professionals) from a critical UX standpoint. The desired output wasn't just a generic summary, but a concise, actionable analysis identifying key **opportunities** and **risks**, tailored for an **executive audience**. This requires focusing sharply on:
 
-**Objective:**  
-Evaluate a (synthetic) mobile app brief from a **UX perspective**, identifying key **opportunities** and **risks**. Responses should be **concise**, **actionable**, and tailored for **executive stakeholders**, with a focus on:
-- **User impact**
-- **Feasibility**
-- **Strategic alignment**
+*   User impact
+*   Feasibility concerns
+*   Strategic alignment
 
-The fictional app under review is **WellNest**—a wellness and mindfulness application targeting young professionals.
+Achieving this level of targeted analysis often requires more than straightforward instructions; it demands nuanced interpretation, a common challenge for standard LLM prompting.
 
----
+## Methodology: Standard vs. Interpretive Framing
 
-## Testing Conditions
+To assess the impact of Behavioral Lensing, two distinct approaches were compared using identical task inputs:
 
-Two prompt variants were tested:
+1.  **Standard Prompting:** The evaluation task was presented directly to the LLMs without specific interpretive guidance.
+2.  **Behavioral Lensing (IFB):** The same task was presented, but preceded by a custom **Interpretive Framing Block (IFB)**. This IFB was designed to prime the model with a UX-centric interpretive stance, focusing its "attention" on the core evaluation criteria relevant to the task.
 
-- `standard-output.md` – The task was presented without any interpretive scaffolding.
-- `ifb-output.md` – The same task, preceded by a custom **Interpretive Framing Block (IFB)** designed to establish a UX-centered interpretive stance.
+These two approaches were tested across the following generation models:
 
-These were submitted to the following models:
-- **ChatGPT-4o**
-- **Claude 3.7 (non-reasoning variant)**
+*   **ChatGPT-4o**
+*   **Claude 3.7**
 
-Each model received identical task content, with the only difference being the presence or absence of the IFB.
+The effectiveness of each approach was then assessed via a follow-up **comparative analysis prompt** submitted to capable evaluation models:
 
----
+*   **ChatGPT-o1**
+*   **Claude 3.7** (with extended reasoning enabled)
+*   **Gemini 2.5 Pro Preview**
 
-## Comparison Approach
+The detailed results of these comparisons, examining differences in strategic focus, actionability, and alignment, can be found in the `output-comparison.md` files.
 
-Each pair of outputs (standard + IFB) was evaluated using a follow-up **comparative analysis prompt**.
+## Explore the Data
 
-This prompt was run through the following models:
-- **ChatGPT o1**
-- **Claude 3.7 (extended reasoning enabled)**
-- **Gemini 2.5 Pro Preview**
+The outputs and comparisons are organized by model. Supporting files detail the IFB construction process.
 
-The results are stored in:
-- `output-comparison.md`
+**Supporting Files:**
 
----
+*   [IFB Role Selection (ChatGPT-4o)](./role-evaluator.md)
+*   [IFB Construction Session (ChatGPT-4o)](./ifb-construction.md)
 
-## Folder Structure
+**ChatGPT-4o Results:**
+
+*   [Standard Output](./ChatGPT/standard-output.md)
+*   [IFB Enhanced Output](./ChatGPT/ifb-output.md)
+*   [Output Comparison](./ChatGPT/output-comparison.md)
+
+**Claude 3.7 Results:**
+
+*   [Standard Output](./Claude/standard-output.md)
+*   [IFB Enhanced Output](./Claude/ifb-output.md)
+*   [Output Comparison](./Claude/output-comparison.md)
 
 ```
 ux-executive-brief-analysis/
@@ -67,27 +74,6 @@ ux-executive-brief-analysis/
 
 ---
 
-## Reproducibility
+## Reproducibility Note
 
-All tests were conducted via **live chat interfaces**. While outputs may differ slightly in structure across platforms, all sessions are faithfully represented in the markdown files.
-
-You are encouraged to **reproduce the test yourself** using the included prompts.
-
----
-
-## Direct Links
-
-- [Role Evaluator](./role-evaluator.md)  
-  How the IFB role was selected in ChatGPT-4o.
-- [IFB Construction](./ifb-construction.md)  
-  Full ChatGPT-4o IFB construction session.
-
-**ChatGPT-4o Outputs**
-- [Standard](./ChatGPT/standard-output.md)
-- [IFB Enhanced](./ChatGPT/ifb-output.md)
-- [Output Comparison](./ChatGPT/output-comparison.md)
-
-**Claude 3.7 Outputs**
-- [Standard](./Claude/standard-output.md)
-- [IFB Enhanced](./Claude/ifb-output.md)
-- [Output Comparison](./Claude/output-comparison.md)
+Tests were conducted via live chat interfaces. While minor formatting variations might occur if reproduced, the content represents the sessions accurately. You are encouraged to reproduce the test yourself using the included prompts and IFB details.
